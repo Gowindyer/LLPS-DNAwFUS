@@ -1,0 +1,32 @@
+<ForceField>
+
+  <AtomTypes>
+    <Type name='0' class='DN' element='Ti' mass='100'/>
+    <Type name='1' class='FN' element='Ti' mass='100'/>
+    <Type name='2' class='FM' element='Ti' mass='100'/>
+    <Type name='3' class='FC' element='Ti' mass='100'/>
+  </AtomTypes>
+
+  <Residues>
+    <Residue name="DNA-ter">
+      <Atom name="DN" type="0"/>
+      <ExternalBond atomName="DN"/>
+    </Residue>
+    <Residue name="DNA">
+      <Atom name="DN" type="0"/>
+      <ExternalBond atomName="DN"/>
+      <ExternalBond atomName="DN"/>
+      </Residue>
+    </Residues>
+
+
+  <HarmonicBondForce>
+        <Bond class1="DN" class2="DN" length="0.25" k="1500"/>
+        <Bond class1="FN" class2="FN" length="0.38" k="1500"/>
+        <Bond class1="FN" class2="FM" length="0.38" k="1500"/>
+        <Bond class1="FM" class2="FM" length="0.38" k="1500"/>
+        <Bond class1="FM" class2="FC" length="0.38" k="1500"/>
+        <Bond class1="FC" class2="FC" length="0.38" k="1500"/>
+  </HarmonicBondForce>
+
+</ForceField>

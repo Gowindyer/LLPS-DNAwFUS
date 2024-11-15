@@ -1,0 +1,18 @@
+tolerance 12.50
+add_box_sides = 1.0
+filetype pdb
+output mixed_system.pdb
+
+# Here is Randomly place a certain number of type1 molecules into a given region
+structure ../DNA/DNA.pdb
+   number 5500
+   changechains
+   inside box 0.0000 0.0000 0.0000 5000.4570 5000.4570 5000.4570
+end structure
+
+# Here is Randomly place a certain number of type2 molecules into a given region
+structure ../protein_fus/protein_fus.pdb
+   changechains
+   number 5500
+   inside box 0.0000 0.0000 0.0000 5000.4570 5000.4570 5000.4570
+end structure

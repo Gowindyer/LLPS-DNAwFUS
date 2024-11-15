@@ -1,0 +1,37 @@
+{"Temperature":300,
+"Friction":1,
+"Timestep":5,
+"Equilibrium_time":20000,
+"total_simu_steps":500000,
+"DCD_period":10000,
+"log_period":10000,
+"platform_type":"CUDA",
+"dimension":3,
+
+"cutoffdistance":20.0,
+"initial_pdb_path":"gene_system_pdb/pack_mixed_system/mixed_system.pdb",
+"out_folder_name":"data",
+"out_file_name":"system", 
+
+"execute_packmol_path":"/home/windyer/software/packmol-20.14.4/packmol",
+"packmol_inp": "pack_system.inp",
+"output_name_sys": "mixed_system",
+"path_type1_pdb": "../DNA/DNA.pdb",
+"path_type2_pdb": "../protein_fus/protein_fus.pdb",
+"num_type_1": 5500,
+"num_type_2": 5500,
+"box_size": [0,0,0,5000.457,5000.457,5000.457],
+
+
+"bond_length_DNA": 2.5,
+"num_bead_in_DNA": 5,
+"residue_name_of_DNA":["DNA"],
+"atom_name_of_DNA":["DN"],
+"atom_mass_of_DNA":100,
+
+"bond_length_fus": 3.8,
+"num_bead_N_mediate_C_fus": [5, 5, 5],
+"residue_name_of_fus": ["FUN","FUM","FUC"],
+"atom_name_of_fus": ["FN","FM","FC"],
+"atom_mass_of_fus":100
+}

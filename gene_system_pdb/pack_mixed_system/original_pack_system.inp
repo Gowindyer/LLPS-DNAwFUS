@@ -1,0 +1,24 @@
+# 不同分子的原子之间距离将会以tolerance=*angstrom精度隔开，单位埃 unit: angstrom
+tolerance 3.75
+
+# 给输出的pdb文件CRYST1字段定义盒子，盒子尺寸对应系统中原子坐标（x ,y,z）最大和最小
+add_box_sides = 1.0
+
+# 定义输出文件名
+filetype pdb
+output mixed_system.pdb
+
+# 将一定数目的type1分子随机放入给定区域
+# inside box 后面限定区域：x_min y_min z_min x_max y_max z_max
+# 这里是固定z方向，将原子放在x-y平面。
+structure ../single_chain/sin_chain.pdb
+   number 300
+   inside box  0. 0. 150.345436  450. 450. 150.345436
+end structure
+
+# 将一定数目的type2分子随机放入给定区域
+# 同上
+structure ../star_dpd/star_dpd.pdb
+   number 300
+   inside box  0. 0. 150.345436  450. 450. 150.345436
+end structure

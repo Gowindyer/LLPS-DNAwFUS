@@ -1,0 +1,32 @@
+"Temperature":温度(K),
+"Friction": 摩擦系数(1/ps),
+"Timestep": 时间步长(fs),
+"Equilibrium_time":平衡模拟步数,
+"total_simu_steps":模拟步数,
+"DCD_period":间隔多少步长存储轨迹,
+"log_period":间隔多少步长存储模拟日志,
+"platform_type":模拟平台,
+"dimension":模拟维度,可以设置2维或者3维，需要注意的是设置三维需要修改“box_size”项，以便初始结构也是三维的。
+
+"cutoffdistance":截断距离,
+ ,
+
+"execute_packmol_path":packmol执行文件路径，"/Users/windy/workspace/software/packmol-20.14.3/packmol",
+"packmol_inp": packmol执行文件名字，"pack_system.inp",
+"output_name_sys": packmol输出系统pdb名字，"mixed_system",
+"path_type1_pdb": DNA的pdb路径， "../linear_chain/DNA.pdb",
+"path_type2_pdb": fus蛋白pdb路径，"../protein_fus/protein_fus.pdb",
+"num_type_1": DNA链数目,
+"num_type_2": fus蛋白链数目,
+"box_size": packmol堆放链的盒子大小[x0,y0,z0,x,y,z]，[0,0,129.345,500.457,500.457,129.345],
+
+"num_bead_in_DNA": DNA链原子数目,
+"residue_name_of_DNA": DNA链残基名，["DNA"],
+"atom_name_of_DNA“:DNA链原子名字，["DN"],
+"atom_mass_of_DNA":DNA原子质量，100,
+
+"num_bead_N_mediate_C_fus": fus蛋白不同部分原子数目，例如[5, 4, 3]表示N端5个bead，中间4个bead，C端3个bead
+"residue_name_of_fus": fus蛋白残基名，格式[N端，中间，C端]，["FUN","FUM","FUC"],
+"atom_name_of_fus": fus蛋白不同片段原子名，格式[N端，中间，C端],["FN","FM","FC"],
+"atom_mass_of_fus":fus蛋白原子质量
+

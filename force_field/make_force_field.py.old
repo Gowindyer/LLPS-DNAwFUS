@@ -1,0 +1,84 @@
+import mdtraj as md
+import numpy as np
+import json
+import sys
+
+def CreateAtomtype(write_file,field):
+    write_file.write(' '*2 + "<AtomTypes>\n") 
+    for i in range(len(field)):
+        write_file.write(' '*4 + "<Type name='%s' class='%s' element='%s' mass='%s'/>\n"% \
+                         (field[i][0],field[i][1],field[i][2],field[i][3]))
+    write_file.write(' '*2 + "</AtomTypes>\n")
+    
+def CreateResidueTemplate(write_file,parameter):
+    '''
+    Parameters
+    ----------
+    write_file : TestIOWrapper
+        force field file
+    parameter : list
+        there are three type parameters.
+        parameter[0] is the name of residue. 
+        parameter[1] is a array list,which include the name and type of atom 
+        and format just like [[a_name1,a_type1],[a_name2,a_type2],[a_name3,a_type3]]
+        parameter[2] is  the atom name of external bond,which type is list. 
+    Returns
+    -------
+    None.
+
+    '''
+    write_file.write(' '*4 + '<Residue name="%s">\n'%parameter[0])
+    for i,atom_name_type in enumerate(parameter[1]):
+        # parameter[1] = [[a_name1,a_type1],[a_name2,a_type2],[a_name3,a_type3]]
+        write_file.write(' '*6 + '<Atom name="%s" type="%d"/>\n'%
+                         (atom_name_type[0],atom_name_type[1]))
+        
+    if len(parameter[2]) != 0:
+       for i, externalbond in enumerate(parameter[2]):
+           write_file.write(' '*6 + '<ExternalBond atomName="%s"/>\n'%externalbond)
+           
+    write_file.write(' '*4 + '</Residue>\n')
+    
+# parameter          
+configdic = json.load(open('../simulation_parameters.json')) 
+
+atom_name_lin_chain = configdic["atom_name_of_linear_chain"]
+resi_name_lin_chain = configdic["residue_name_of_linear_chain"]
+resi_name_fus = configdic["residue_name_of_fus"]
+atom_name_fus = configdic["atom_name_of_fus"]
+all_atom_name = atom_name_lin_chain + atom_name_fus
+all_resi_name = resi_name_lin_chain + resi_name_fus
+
+
+atom_mass = {}
+atom_mass_lin_chain = configdic["atom_mass_of_linear_chain"]
+atom_mass_fus = configdic["atom_mass_of_fus"]
+
+for i in  atom_name_lin_chain:
+    atom_mass[i] = atom_mass_lin_chain
+for i in atom_name_fus:
+    atom_mass[i] = atom_mass_fus
+    
+Atom_type = [[i,a_n,"Ti",atom_mass[a_n]] for i,a_n in enumerate(all_atom_name)]
+with open("force_test.xml","w+") as force_xml:
+     
+    # header 
+     force_xml.write("<ForceField>\n")
+     force_xml.write("\n")
+     
+     # AtomTypes
+     CreateAtomtype(force_xml,Atom_type)
+     force_xml.write("\n")
+     # Residues
+     force_xml.write(' '*2 + '<Residues>\n')
+     
+     # Create residue
+     for i,resi_n in enumerate(all_resi_name):
+
+         CreateResidueTemplate(force_xml, [all_resi_name[i]+"-ter",[[all_atom_name[i],i]],[all_atom_name[i]]])
+         CreateResidueTemplate(force_xml, [all_resi_name[i],[[all_atom_name[i],i]],[all_atom_name[i],all_atom_name[i]]])
+    
+     force_xml.write(' '*2 + '</Residues>\n')
+     # footer
+     force_xml.write("\n")
+     force_xml.write("</ForceField>\n")
