@@ -10,13 +10,15 @@ LLPS_FUSandDNA是基于openMM 开发来模拟fus蛋白和DNA液液相分离的to
 
 # run_simulation.py
 执行模拟的文件，模拟参数文件可以通过修改simulaiton_parameters.json的指定内容来修改。注意，当前脚本运行在CPU上,如需GPU，请修改simulation_parameters.json里的计算平台选项为CUDA。
+
 执行命令：python run_simulation.py
+
 CPU指定核数(如1核)： OPENMM_CPU_THREADS=1 python run_simulation.py
 
 # 软件包
-openmm: 生成两种小分子，运行分子模拟
-Packmol: 构建混合系统.
-json: 加载参数文件.
+* openmm: 生成两种小分子，运行分子模拟
+* Packmol: 构建混合系统.
+* json: 加载参数文件.
 等
 
 2024.4.30
